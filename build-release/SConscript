@@ -36,7 +36,7 @@ if (system() == "Linux"):
 
 # Create an environmnet
 env = Environment(TARGET_ARCH = "x86_64",
-    CPPPATH = cppapth,
+    CPPPATH = cpppath,
     LIBPATH = libpath,
     LIBS = libs,
     CXXFLAGS = cxxflags[system()],
