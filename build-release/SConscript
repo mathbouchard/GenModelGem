@@ -54,5 +54,5 @@ env.SharedLibrary(target = "../lib/" + target, source = files)
 
 print("building gem file")
 call(["gem", "build", "genmodel.gemspec"])
-call(["mv", "genmodel-0.0.19.gem", "../lib/genmodel-0.0.19.gem"])
+call(["mv", "genmodel-0.0.20.gem", "../lib/genmodel-0.0.20.gem"])
 print("done")
