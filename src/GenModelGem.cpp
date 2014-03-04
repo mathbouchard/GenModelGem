@@ -98,7 +98,7 @@ void initall()
                 throw string("Genmodel C++ library is missing or is not in the library path\n");
             printf("Done loading library %s\n", (string("libgenmodel")+suffix).c_str());
         }
-        
+        printf("Loading library symboles\n");
         *(void **)(&_FindConstraintMaxLhs) = dlsym(genmodel_lib, "FindConstraintMaxLhs");
         if ((error = dlerror()) != NULL) {call_error("FindConstraintMaxLhs");}
         *(void **)(&_FindConstraintMinLhs) = dlsym(genmodel_lib, "FindConstraintMinLhs");
@@ -139,7 +139,7 @@ void initall()
         if ((error = dlerror()) != NULL) {call_error("CreateNewModel");}
         *(void **)(&_IsSolverAvailable) = dlsym(genmodel_lib, "IsSolverAvailable");
         if ((error = dlerror()) != NULL) {call_error("IsSolverAvailable");}
-        
+        printf("IsSolverAvailable loaded, ptr = %p\n",  (void *)_IsSolverAvailable);
         *(void **)(&_CopyOrder) = dlsym(genmodel_lib, "CopyOrder");
         if ((error = dlerror()) != NULL) {call_error("CopyOrder");}
         *(void **)(&_DeleteModel) = dlsym(genmodel_lib, "DeleteModel");
@@ -190,6 +190,7 @@ void initall()
         if ((error = dlerror()) != NULL) {call_error("DeleteMipStarts");}
         *(void **)(&_GetMIPRelativeGap) = dlsym(genmodel_lib, "GetMIPRelativeGap");
         if ((error = dlerror()) != NULL) {call_error("GetMIPRelativeGap");}
+        printf("done.\n");
     } catch (string e) {
         throw e;
     } catch (...) {
@@ -350,6 +351,8 @@ long DeleteModel(long token)
 {
     START_FUNC
     return (_DeleteModel)(token);
+    dlclose(genmodel_lib);
+    genmodel_lib = NULL;
     END_FUNC
 }
 

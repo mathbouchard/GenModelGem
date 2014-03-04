@@ -68,6 +68,7 @@ long ChangeBulkBounds(int count, int* indices, char* types, double* values, long
 long ChangeBulkObjectives(int count, int* indices, double* values, long token);
 long DeleteMipStarts(long token);
 double GetMIPRelativeGap(long token);
+void Close();
 
 template<class T> class InterfaceVector {
 public:

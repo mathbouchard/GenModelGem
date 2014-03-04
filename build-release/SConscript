@@ -15,7 +15,7 @@ elif (system() == "Darwin"):
    cppdefines.append("Darwin")
 
 cxxflags = {
-    "Linux": "-g -O2 -Wall -pthread -fmessage-length=0", #-std=c++11",
+    "Linux": "-g -O2 -Wall -pthread -fmessage-length=0 -fno-strict-aliasing", #-std=c++11",
     "Windows": "/O2 /MD /EHsc",
     "Darwin": "-g -O2 -m64 -Wall -pthread -fmessage-length=0 -std=c++11",
     }
