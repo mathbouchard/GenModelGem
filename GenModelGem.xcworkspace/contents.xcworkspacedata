@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <Group
+      location = "group:src"
+      name = "src">
+      <FileRef
+         location = "group:GenModelGem.i">
+      </FileRef>
+      <FileRef
+         location = "group:GenModelGem.cpp">
+      </FileRef>
+      <FileRef
+         location = "group:BitVector.h">
+      </FileRef>
+      <FileRef
+         location = "group:BitVector.cpp">
+      </FileRef>
+      <FileRef
+         location = "group:GenModelGem.h">
+      </FileRef>
+      <FileRef
+         location = "group:../build-release/SConscript">
+      </FileRef>
+      <FileRef
+         location = "group:../gem/genmodel.gemspec">
+      </FileRef>
+      <FileRef
+         location = "group:../SConstruct">
+      </FileRef>
+   </Group>
+</Workspace>
