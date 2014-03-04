@@ -85,8 +85,8 @@ void initall()
             string suffix = string(".dylib");
 #else
             string suffix = string(".so");
-            genmodel_lib = dlopen("libgenmodel.so", RTLD_LAZY);
 #endif
+            printf("Loading library %s\n", (string("libgenmodel")+suffix).c_str());
             genmodel_lib = dlopen((string("libgenmodel")+suffix).c_str(), RTLD_LAZY);
             if(genmodel_lib == NULL)
                 throw string("Genmodel C++ library is missing or is not in the library path\n");
