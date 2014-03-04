@@ -23,7 +23,7 @@ cxxflags = {
 cpppath = [os.environ['HOME']+"/.rvm/rubies/ruby-1.9.3-p392/include/ruby-1.9.1", os.environ['HOME']+"/.rvm/rubies/ruby-1.9.3-p392/include/ruby-1.9.1/x86_64-darwin13.0.2"]
            #r"/System/Library/Frameworks/Python.framework/Versions/2.7/include/python2.7",
 if (system() == "Linux"):
-    cpppath = ["/usr/local/include/ruby-1.9.1", "/usr/local/include/ruby-1.9.1/x86_64-linux"]
+    cpppath = ["/usr/local/include/ruby-1.9.1", "/usr/local/include/ruby-1.9.1/x86_64-linux", "/usr/include/ruby-1.9.1", "/usr/include/ruby-1.9.1/x86_64-linux"]
 
 libpath = [os.environ['HOME']+"/.rvm/rubies/ruby-1.9.3-p392/lib"] 
            #,"/System/Library/Frameworks/Python.framework/Versions/2.7/lib/"]
