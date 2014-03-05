@@ -49,10 +49,27 @@ env = Environment(TARGET_ARCH = "x86_64",
 files = Glob("*.cpp")
 
 # Build the library
-call(["swig","-ruby","-o","../src/GenModelGem_ruby.cpp","-c++","../src/GenModelGem.i"])
-env.SharedLibrary(target = "../lib/" + target, source = files)
 
-print("building gem file")
-call(["gem", "build", "genmodel.gemspec"])
-call(["mv", "genmodel-0.0.20.gem", "../lib/genmodel-0.0.20.gem"])
-print("done")
+#new_target = []
+#for cmd_target in COMMAND_LINE_TARGETS:
+#    if cmd_target == 'lib':
+#        new_target.append("../lib/" + target)
+#    if cmd_target == 'gem':
+#        new_target.append("../lib/genmodel.gem")
+#    if cmd_target == 'clean':
+#        new_target.append("clean")
+#COMMAND_LINE_TARGETS = new_target
+
+swig_file = env.Command( target="GenModelGem_ruby.cpp", source="GenModelGem.i", action = "swig -ruby -o src/GenModelGem_ruby.cpp -c++ src/GenModelGem.i")
+
+gem_lib = env.SharedLibrary(target = "../lib/" + target, source = files)
+
+gem_build = env.Command(target = "../lib/genmodel.gem", source = None, action = "gem build gem/genmodel.gemspec && mv genmodel-*.gem lib/")
+
+clean = env.Command(target = "../clean", source = None, action = "rm -f lib/"+target+"* build-release/*.os lib/genmodel-*.gem")
+
+Requires( gem_lib, swig_file )
+Depends( gem_build, gem_lib )
+Default(gem_build)
+
+
