@@ -98,45 +98,64 @@ void initall()
                 throw string("Genmodel C++ library is missing or is not in the library path\n");
             printf("Done loading library %s\n", (string("libgenmodel")+suffix).c_str());
         }
-        printf("Loading library symboles\n");
+        printf("Loading library symbols\n");
         *(void **)(&_FindConstraintMaxLhs) = dlsym(genmodel_lib, "FindConstraintMaxLhs");
         if ((error = dlerror()) != NULL) {call_error("FindConstraintMaxLhs");}
+        printf("_FindConstraintMaxLhs loaded, ptr = %p\n",  (void *)_FindConstraintMaxLhs);
         *(void **)(&_FindConstraintMinLhs) = dlsym(genmodel_lib, "FindConstraintMinLhs");
         if ((error = dlerror()) != NULL) {call_error("FindConstraintMinLhs");}
+        printf("_FindConstraintMinLhs loaded, ptr = %p\n",  (void *)_FindConstraintMinLhs);
         *(void **)(&_MakeConstraintFeasible) = dlsym(genmodel_lib, "MakeConstraintFeasible");
         if ((error = dlerror()) != NULL) {call_error("MakeConstraintFeasible");}
-        *(void **)(&_WriteProblemToLpFile) = dlsym(genmodel_lib, "WriteProblemToLpFile");
+        printf("_MakeConstraintFeasible loaded, ptr = %p\n",  (void *)_IsSolverAvailable);
+        *(void **)(&_MakeConstraintFeasible) = dlsym(genmodel_lib, "_MakeConstraintFeasible");
         if ((error = dlerror()) != NULL) {call_error("WriteProblemToLpFile");}
+        printf("_MakeConstraintFeasible loaded, ptr = %p\n",  (void *)_MakeConstraintFeasible);
         *(void **)(&_WriteSolutionToFile) = dlsym(genmodel_lib, "WriteSolutionToFile");
         if ((error = dlerror()) != NULL) {call_error("WriteSolutionToFile");}
+        printf("_WriteSolutionToFile loaded, ptr = %p\n",  (void *)_WriteSolutionToFile);
         *(void **)(&_AddConst) = dlsym(genmodel_lib, "AddConst");
         if ((error = dlerror()) != NULL) {call_error("AddConst");}
+        printf("_AddConst loaded, ptr = %p\n",  (void *)_AddConst);
         *(void **)(&_AddConstBulk) = dlsym(genmodel_lib, "AddConstBulk");
         if ((error = dlerror()) != NULL) {call_error("AddConstBulk");}
+        printf("_AddConstBulk loaded, ptr = %p\n",  (void *)_AddConstBulk);
         *(void **)(&_AddVar) = dlsym(genmodel_lib, "AddVar");
         if ((error = dlerror()) != NULL) {call_error("AddVar");}
+        printf("_AddVar loaded, ptr = %p\n",  (void *)_AddVar);
         *(void **)(&_AddVarBulk) = dlsym(genmodel_lib, "AddVarBulk");
         if ((error = dlerror()) != NULL) {call_error("AddVarBulk");}
+        printf("_AddVarBulk loaded, ptr = %p\n",  (void *)_AddVarBulk);
         *(void **)(&_AddNz) = dlsym(genmodel_lib, "AddNz");
         if ((error = dlerror()) != NULL) {call_error("AddNz");}
+        printf("_AddNz loaded, ptr = %p\n",  (void *)_AddNz);
         *(void **)(&_AddNzToLast) = dlsym(genmodel_lib, "AddNzToLast");
         if ((error = dlerror()) != NULL) {call_error("AddNzToLast");}
+        printf("_AddNzToLast loaded, ptr = %p\n",  (void *)_AddNzToLast);
         *(void **)(&_AddNzBulk) = dlsym(genmodel_lib, "AddNzBulk");
         if ((error = dlerror()) != NULL) {call_error("AddNzBulk");}
+        printf("_AddNzBulk loaded, ptr = %p\n",  (void *)_AddNzBulk);
         *(void **)(&_SetQpCoef) = dlsym(genmodel_lib, "SetQpCoef");
         if ((error = dlerror()) != NULL) {call_error("SetQpCoef");}
+        printf("_SetQpCoef loaded, ptr = %p\n",  (void *)_SetQpCoef);
         *(void **)(&_SetNumbers) = dlsym(genmodel_lib, "SetNumbers");
         if ((error = dlerror()) != NULL) {call_error("SetNumbers");}
+        printf("_SetNumbers loaded, ptr = %p\n",  (void *)_SetNumbers);
         *(void **)(&_SetLongParam) = dlsym(genmodel_lib, "SetLongParam");
         if ((error = dlerror()) != NULL) {call_error("SetLongParam");}
+        printf("_SetLongParam loaded, ptr = %p\n",  (void *)_SetLongParam);
         *(void **)(&_SetDblParam) = dlsym(genmodel_lib, "SetDblParam");
         if ((error = dlerror()) != NULL) {call_error("SetDblParam");}
+        printf("_SetDblParam loaded, ptr = %p\n",  (void *)_SetDblParam);
         *(void **)(&_SetBoolParam) = dlsym(genmodel_lib, "SetBoolParam");
         if ((error = dlerror()) != NULL) {call_error("SetBoolParam");}
+        printf("_SetBoolParam loaded, ptr = %p\n",  (void *)_SetBoolParam);
         *(void **)(&_SetStrParam) = dlsym(genmodel_lib, "SetStrParam");
         if ((error = dlerror()) != NULL) {call_error("SetStrParam");}
+        printf("_SetStrParam loaded, ptr = %p\n",  (void *)_SetStrParam);
         *(void **)(&_CreateNewModel) = dlsym(genmodel_lib, "CreateNewModel");
         if ((error = dlerror()) != NULL) {call_error("CreateNewModel");}
+        printf("_CreateNewModel loaded, ptr = %p\n",  (void *)_CreateNewModel);
         *(void **)(&_IsSolverAvailable) = dlsym(genmodel_lib, "IsSolverAvailable");
         if ((error = dlerror()) != NULL) {call_error("IsSolverAvailable");}
         printf("IsSolverAvailable loaded, ptr = %p\n",  (void *)_IsSolverAvailable);
