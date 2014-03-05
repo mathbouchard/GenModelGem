@@ -19,6 +19,43 @@ void* genmodel_lib = NULL;
 #define START_FUNC try{ if(genmodel_lib == NULL) {initall();}
 #define END_FUNC } catch (string e) { throw e; } return 1;
 
+/*
+union test {
+    void* v;
+    double (*f)(long, long);
+};
+*/
+
+typedef double (*d_f_ll)(long, long);
+typedef long (*l_ll)(long, long);
+typedef long (*l_cpl)(char*, long);
+typedef long (*l_cpdcl)(char*, double, char, long);
+typedef bool (*b_cpdplcl)(char*, double*, long, char, long);
+typedef long (*l_cpdddcl)(char*, double, double, double, char, long);
+typedef bool (*b_cpdplddcl)(char*, double*, long, double, double, char, long);
+typedef long (*l_lldl)(long, long, double, long);
+typedef long (*l_ldl)(long, double, long);
+typedef long (*l_lplpdplllll)(long*, long*, double*, long, long, long, long, long);
+typedef long (*l_l)(long);
+typedef long (*l_cpll)(char*, long, long);
+typedef long (*l_cpdl)(char*, double, long);
+typedef long (*l_cpbl)(char*, bool, long);
+typedef long (*l_cpcpl)(char*, char*, long);
+typedef long (*l_ccp)(char, char*);
+typedef bool (*b_c)(char);
+typedef long (*l_liipip)(long, int, int*, int*);
+typedef bool (*b_dpll)(double*, long, long);
+typedef bool (*b_l)(long);
+typedef bool (*b_dplll)(double*, long, long, long);
+typedef bool (*b_dpdpll)(double*, double*, long, long);
+typedef double (*d_ll)(long, long);
+typedef bool (*b_ldl)(long, double, long);
+typedef char (*c_ll)(long, long);
+typedef bool (*b_lcl)(long, char, long);
+typedef double (*d_l)(long);
+typedef long (*l_iipcpdpl)(int, int*, char*, double*, long);
+typedef long (*l_iipdpl)(int, int*, double*, long);
+
 void call_error(const char* func)
 {
     snprintf(tmp, 4096, "Cannot load function %s : %s\n", func, error);
@@ -98,116 +135,116 @@ void initall()
                 throw string("Genmodel C++ library is missing or is not in the library path\n");
             printf("Done loading library %s\n", (string("libgenmodel")+suffix).c_str());
         }
-        printf("Loading library symbols\n");
-        *(void **)(&_FindConstraintMaxLhs) = dlsym(genmodel_lib, "FindConstraintMaxLhs");
+        printf("Loading library symbols %p\n", genmodel_lib);
+        _FindConstraintMaxLhs = (d_f_ll)dlsym(genmodel_lib, "FindConstraintMaxLhs");
         if ((error = dlerror()) != NULL) {call_error("FindConstraintMaxLhs");}
         printf("_FindConstraintMaxLhs loaded, ptr = %p\n",  (void *)_FindConstraintMaxLhs);
-        *(void **)(&_FindConstraintMinLhs) = dlsym(genmodel_lib, "FindConstraintMinLhs");
+        _FindConstraintMinLhs = (d_f_ll)dlsym(genmodel_lib, "FindConstraintMinLhs");
         if ((error = dlerror()) != NULL) {call_error("FindConstraintMinLhs");}
         printf("_FindConstraintMinLhs loaded, ptr = %p\n",  (void *)_FindConstraintMinLhs);
-        *(void **)(&_MakeConstraintFeasible) = dlsym(genmodel_lib, "MakeConstraintFeasible");
+        _MakeConstraintFeasible = (l_ll)dlsym(genmodel_lib, "MakeConstraintFeasible");
         if ((error = dlerror()) != NULL) {call_error("MakeConstraintFeasible");}
         printf("_MakeConstraintFeasible loaded, ptr = %p\n",  (void *)_IsSolverAvailable);
-        *(void **)(&_MakeConstraintFeasible) = dlsym(genmodel_lib, "_MakeConstraintFeasible");
-        if ((error = dlerror()) != NULL) {call_error("WriteProblemToLpFile");}
-        printf("_MakeConstraintFeasible loaded, ptr = %p\n",  (void *)_MakeConstraintFeasible);
-        *(void **)(&_WriteSolutionToFile) = dlsym(genmodel_lib, "WriteSolutionToFile");
+        _WriteProblemToLpFile = (l_cpl)dlsym(genmodel_lib, "WriteProblemToLpFile");
+        if ((error = dlerror()) != NULL) {call_error("_WriteProblemToLpFile");}
+        printf("_WriteProblemToLpFile loaded, ptr = %p\n",  (void *)_WriteProblemToLpFile);
+        _WriteSolutionToFile = (l_cpl)dlsym(genmodel_lib, "WriteSolutionToFile");
         if ((error = dlerror()) != NULL) {call_error("WriteSolutionToFile");}
         printf("_WriteSolutionToFile loaded, ptr = %p\n",  (void *)_WriteSolutionToFile);
-        *(void **)(&_AddConst) = dlsym(genmodel_lib, "AddConst");
+        _AddConst = (l_cpdcl)dlsym(genmodel_lib, "AddConst");
         if ((error = dlerror()) != NULL) {call_error("AddConst");}
         printf("_AddConst loaded, ptr = %p\n",  (void *)_AddConst);
-        *(void **)(&_AddConstBulk) = dlsym(genmodel_lib, "AddConstBulk");
+        _AddConstBulk = (b_cpdplcl)dlsym(genmodel_lib, "AddConstBulk");
         if ((error = dlerror()) != NULL) {call_error("AddConstBulk");}
         printf("_AddConstBulk loaded, ptr = %p\n",  (void *)_AddConstBulk);
-        *(void **)(&_AddVar) = dlsym(genmodel_lib, "AddVar");
+        _AddVar = (l_cpdddcl)dlsym(genmodel_lib, "AddVar");
         if ((error = dlerror()) != NULL) {call_error("AddVar");}
         printf("_AddVar loaded, ptr = %p\n",  (void *)_AddVar);
-        *(void **)(&_AddVarBulk) = dlsym(genmodel_lib, "AddVarBulk");
+        _AddVarBulk = (b_cpdplddcl)dlsym(genmodel_lib, "AddVarBulk");
         if ((error = dlerror()) != NULL) {call_error("AddVarBulk");}
         printf("_AddVarBulk loaded, ptr = %p\n",  (void *)_AddVarBulk);
-        *(void **)(&_AddNz) = dlsym(genmodel_lib, "AddNz");
+        _AddNz = (l_lldl)dlsym(genmodel_lib, "AddNz");
         if ((error = dlerror()) != NULL) {call_error("AddNz");}
         printf("_AddNz loaded, ptr = %p\n",  (void *)_AddNz);
-        *(void **)(&_AddNzToLast) = dlsym(genmodel_lib, "AddNzToLast");
+        _AddNzToLast = (l_ldl)dlsym(genmodel_lib, "AddNzToLast");
         if ((error = dlerror()) != NULL) {call_error("AddNzToLast");}
         printf("_AddNzToLast loaded, ptr = %p\n",  (void *)_AddNzToLast);
-        *(void **)(&_AddNzBulk) = dlsym(genmodel_lib, "AddNzBulk");
+        _AddNzBulk = (l_lplpdplllll)dlsym(genmodel_lib, "AddNzBulk");
         if ((error = dlerror()) != NULL) {call_error("AddNzBulk");}
         printf("_AddNzBulk loaded, ptr = %p\n",  (void *)_AddNzBulk);
-        *(void **)(&_SetQpCoef) = dlsym(genmodel_lib, "SetQpCoef");
+        _SetQpCoef = (l_lldl)dlsym(genmodel_lib, "SetQpCoef");
         if ((error = dlerror()) != NULL) {call_error("SetQpCoef");}
         printf("_SetQpCoef loaded, ptr = %p\n",  (void *)_SetQpCoef);
-        *(void **)(&_SetNumbers) = dlsym(genmodel_lib, "SetNumbers");
+        _SetNumbers = (l_l)dlsym(genmodel_lib, "SetNumbers");
         if ((error = dlerror()) != NULL) {call_error("SetNumbers");}
         printf("_SetNumbers loaded, ptr = %p\n",  (void *)_SetNumbers);
-        *(void **)(&_SetLongParam) = dlsym(genmodel_lib, "SetLongParam");
+        _SetLongParam = (l_cpll)dlsym(genmodel_lib, "SetLongParam");
         if ((error = dlerror()) != NULL) {call_error("SetLongParam");}
         printf("_SetLongParam loaded, ptr = %p\n",  (void *)_SetLongParam);
-        *(void **)(&_SetDblParam) = dlsym(genmodel_lib, "SetDblParam");
+        _SetDblParam = (l_cpdl)dlsym(genmodel_lib, "SetDblParam");
         if ((error = dlerror()) != NULL) {call_error("SetDblParam");}
         printf("_SetDblParam loaded, ptr = %p\n",  (void *)_SetDblParam);
-        *(void **)(&_SetBoolParam) = dlsym(genmodel_lib, "SetBoolParam");
+        _SetBoolParam = (l_cpbl)dlsym(genmodel_lib, "SetBoolParam");
         if ((error = dlerror()) != NULL) {call_error("SetBoolParam");}
         printf("_SetBoolParam loaded, ptr = %p\n",  (void *)_SetBoolParam);
-        *(void **)(&_SetStrParam) = dlsym(genmodel_lib, "SetStrParam");
+        _SetStrParam = (l_cpcpl)dlsym(genmodel_lib, "SetStrParam");
         if ((error = dlerror()) != NULL) {call_error("SetStrParam");}
         printf("_SetStrParam loaded, ptr = %p\n",  (void *)_SetStrParam);
-        *(void **)(&_CreateNewModel) = dlsym(genmodel_lib, "CreateNewModel");
+        _CreateNewModel = (l_ccp)dlsym(genmodel_lib, "CreateNewModel");
         if ((error = dlerror()) != NULL) {call_error("CreateNewModel");}
         printf("_CreateNewModel loaded, ptr = %p\n",  (void *)_CreateNewModel);
-        *(void **)(&_IsSolverAvailable) = dlsym(genmodel_lib, "IsSolverAvailable");
+        _IsSolverAvailable = (b_c)dlsym(genmodel_lib, "IsSolverAvailable");
         if ((error = dlerror()) != NULL) {call_error("IsSolverAvailable");}
         printf("IsSolverAvailable loaded, ptr = %p\n",  (void *)_IsSolverAvailable);
-        *(void **)(&_CopyOrder) = dlsym(genmodel_lib, "CopyOrder");
+        _CopyOrder = (l_liipip)dlsym(genmodel_lib, "CopyOrder");
         if ((error = dlerror()) != NULL) {call_error("CopyOrder");}
-        *(void **)(&_DeleteModel) = dlsym(genmodel_lib, "DeleteModel");
+        _DeleteModel = (l_l)dlsym(genmodel_lib, "DeleteModel");
         if ((error = dlerror()) != NULL) {call_error("DeleteModel");}
-        *(void **)(&_CreateModel) = dlsym(genmodel_lib, "CreateModel");
+        _CreateModel = (l_l)dlsym(genmodel_lib, "CreateModel");
         if ((error = dlerror()) != NULL) {call_error("CreateModel");}
-        *(void **)(&_SolveModel) = dlsym(genmodel_lib, "SolveModel");
+        _SolveModel = (l_l)dlsym(genmodel_lib, "SolveModel");
         if ((error = dlerror()) != NULL) {call_error("SolveModel");}
-        *(void **)(&_GetSolVars) = dlsym(genmodel_lib, "GetSolVars");
+        _GetSolVars = (b_dpll)dlsym(genmodel_lib, "GetSolVars");
         if ((error = dlerror()) != NULL) {call_error("GetSolVars");}
-        *(void **)(&_HasSolution) = dlsym(genmodel_lib, "HasSolution");
+        _HasSolution = (b_l)dlsym(genmodel_lib, "HasSolution");
         if ((error = dlerror()) != NULL) {call_error("HasSolution");}
-        *(void **)(&_GetDualPrices) = dlsym(genmodel_lib, "GetDualPrices");
+        _GetDualPrices = (b_dpll)dlsym(genmodel_lib, "GetDualPrices");
         if ((error = dlerror()) != NULL) {call_error("GetDualPrices");}
-        *(void **)(&_GetSlacks) = dlsym(genmodel_lib, "GetSlacks");
+        _GetSlacks = (b_dpll)dlsym(genmodel_lib, "GetSlacks");
         if ((error = dlerror()) != NULL) {call_error("GetSlacks");}
-        *(void **)(&_GetReducedCosts) = dlsym(genmodel_lib, "GetReducedCosts");
+        _GetReducedCosts = (b_dpll)dlsym(genmodel_lib, "GetReducedCosts");
         if ((error = dlerror()) != NULL) {call_error("GetReducedCosts");}
-        *(void **)(&_GetRowValues) = dlsym(genmodel_lib, "GetRowValues");
+        _GetRowValues = (b_dplll)dlsym(genmodel_lib, "GetRowValues");
         if ((error = dlerror()) != NULL) {call_error("GetRowValues");}
-        *(void **)(&_GetObjCoef) = dlsym(genmodel_lib, "GetObjCoef");
+        _GetObjCoef = (b_dpll)dlsym(genmodel_lib, "GetObjCoef");
         if ((error = dlerror()) != NULL) {call_error("GetObjCoef");}
-        *(void **)(&_GetBounds) = dlsym(genmodel_lib, "GetBounds");
+        _GetBounds = (b_dpdpll)dlsym(genmodel_lib, "GetBounds");
         if ((error = dlerror()) != NULL) {call_error("GetBounds");}
-        *(void **)(&_GetLowerBound) = dlsym(genmodel_lib, "GetLowerBound");
+        _GetLowerBound = (d_ll)dlsym(genmodel_lib, "GetLowerBound");
         if ((error = dlerror()) != NULL) {call_error("GetLowerBound");}
-        *(void **)(&_GetUpperBound) = dlsym(genmodel_lib, "GetUpperBound");
+        _GetUpperBound = (d_ll)dlsym(genmodel_lib, "GetUpperBound");
         if ((error = dlerror()) != NULL) {call_error("GetUpperBound");}
-        *(void **)(&_SetLowerBound) = dlsym(genmodel_lib, "SetLowerBound");
+        _SetLowerBound = (b_ldl)dlsym(genmodel_lib, "SetLowerBound");
         if ((error = dlerror()) != NULL) {call_error("SetLowerBound");}
-        *(void **)(&_SetUpperBound) = dlsym(genmodel_lib, "SetUpperBound");
+        _SetUpperBound = (b_ldl)dlsym(genmodel_lib, "SetUpperBound");
         if ((error = dlerror()) != NULL) {call_error("SetUpperBound");}
-        *(void **)(&_GetRHS) = dlsym(genmodel_lib, "GetRHS");
+        _GetRHS = (d_ll)dlsym(genmodel_lib, "GetRHS");
         if ((error = dlerror()) != NULL) {call_error("GetRHS");}
-        *(void **)(&_SetRHS) = dlsym(genmodel_lib, "SetRHS");
+        _SetRHS = (b_ldl)dlsym(genmodel_lib, "SetRHS");
         if ((error = dlerror()) != NULL) {call_error("SetRHS");}
-        *(void **)(&_GetSense) = dlsym(genmodel_lib, "GetSense");
+        _GetSense = (c_ll)dlsym(genmodel_lib, "GetSense");
         if ((error = dlerror()) != NULL) {call_error("GetSense");}
-        *(void **)(&_SetSense) = dlsym(genmodel_lib, "SetSense");
+        _SetSense = (b_lcl)dlsym(genmodel_lib, "SetSense");
         if ((error = dlerror()) != NULL) {call_error("SetSense");}
-        *(void **)(&_GetObjVal) = dlsym(genmodel_lib, "GetObjVal");
+        _GetObjVal = (d_l)dlsym(genmodel_lib, "GetObjVal");
         if ((error = dlerror()) != NULL) {call_error("GetObjVal");}
-        *(void **)(&_ChangeBulkBounds) = dlsym(genmodel_lib, "ChangeBulkBounds");
+        _ChangeBulkBounds = (l_iipcpdpl)dlsym(genmodel_lib, "ChangeBulkBounds");
         if ((error = dlerror()) != NULL) {call_error("ChangeBulkBounds");}
-        *(void **)(&_ChangeBulkObjectives) = dlsym(genmodel_lib, "ChangeBulkObjectives");
+        _ChangeBulkObjectives = (l_iipdpl)dlsym(genmodel_lib, "ChangeBulkObjectives");
         if ((error = dlerror()) != NULL) {call_error("ChangeBulkObjectives");}
-        *(void **)(&_DeleteMipStarts) = dlsym(genmodel_lib, "DeleteMipStarts");
+        _DeleteMipStarts = (l_l)dlsym(genmodel_lib, "DeleteMipStarts");
         if ((error = dlerror()) != NULL) {call_error("DeleteMipStarts");}
-        *(void **)(&_GetMIPRelativeGap) = dlsym(genmodel_lib, "GetMIPRelativeGap");
+        _GetMIPRelativeGap = (d_l)dlsym(genmodel_lib, "GetMIPRelativeGap");
         if ((error = dlerror()) != NULL) {call_error("GetMIPRelativeGap");}
         printf("done.\n");
     } catch (string e) {
