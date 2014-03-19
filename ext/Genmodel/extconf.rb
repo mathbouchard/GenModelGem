@@ -2,7 +2,7 @@ require 'mkmf'
 require 'rbconfig'
 require 'find'
 
-extension_name = 'GenModel/GenModel'
+extension_name = 'Genmodel/Genmodel'
 dir_config(extension_name)
 
 #abort "missing malloc()" unless have_func "malloc"
