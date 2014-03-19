@@ -4,6 +4,7 @@
 #endif
 #include <limits>
 
+#ifdef CPLEX_MODULE
 string getcplexerror(CPXENVptr env, int status)
 {
     char  errmsg[4096];
@@ -710,6 +711,33 @@ long GenModelCplex::Clean()
 
 	return 0;
 }
+#else
+long cpx_not_implemented() { throw string("The Cplex module is not available on this platform"); }
+
+GenModelCplex::GenModelCplex() {cpx_not_implemented();}
+GenModelCplex::~GenModelCplex() {cpx_not_implemented();}
+long GenModelCplex::Init(string name) {return cpx_not_implemented();}
+long GenModelCplex::CreateModel(string filename, int type, string dn) {return cpx_not_implemented();}
+long GenModelCplex::CreateModel() {return cpx_not_implemented();}
+long GenModelCplex::AddSolverCol(vector<int>& ind, vector<double>& val, double obj, double lb, double ub, string name, char type) {return cpx_not_implemented();}
+long GenModelCplex::AddSolverRow(vector<int>& ind, vector<double>& val, double rhs, char sense, string name) {return cpx_not_implemented();}
+long GenModelCplex::AddCol(int* newi, double* newcol, int nz, double obj, double lb, double ub, const char* name, char type) {return cpx_not_implemented();}
+long GenModelCplex::AddCut(int* cols, double* vals, int nz, double rhs, char sense, const char* name) {return cpx_not_implemented();}
+long GenModelCplex::ChangeBulkBounds(int count, int * ind, char * type, double * vals) {return cpx_not_implemented();}
+long GenModelCplex::ChangeBulkObjectives(int count, int * ind, double * vals) {return cpx_not_implemented();}
+long GenModelCplex::ChangeBulkNz(int count, int* rind, int* cind, double* vals) {return cpx_not_implemented();}
+long GenModelCplex::WriteProblemToLpFile(string filename) {return cpx_not_implemented();}
+long GenModelCplex::WriteSolutionToFile(string filename) {return cpx_not_implemented();}
+long GenModelCplex::SwitchToMip() {return cpx_not_implemented();}
+long GenModelCplex::SwitchToLp() {return cpx_not_implemented();}
+long GenModelCplex::DeleteMipStarts() {return cpx_not_implemented();}
+long GenModelCplex::Solve() {return cpx_not_implemented();}
+long GenModelCplex::SetSol() {return cpx_not_implemented();}
+long GenModelCplex::Clean() {return cpx_not_implemented();}
+double GenModelCplex::GetMIPRelativeGap() {return cpx_not_implemented();}
+long GenModelCplex::SetDirectParam(int whichparam, genmodel_param value, string type, string message) {return cpx_not_implemented();}
+long GenModelCplex::SetParam(string param, int whichparam, string type, string message, bool implemented) {return cpx_not_implemented();}
+#endif
 
 long CplexData::Reset()
 {
@@ -795,6 +823,7 @@ long CplexData::ClearStructure()
 
 long CplexData::Delete()
 {
+#ifdef CPLEX_MODULE
 	if(lp != NULL)
 	{
 		CPXfreeprob(env, &lp);
@@ -809,6 +838,8 @@ long CplexData::Delete()
     }
 
 	ClearStructure();
+#endif
 
 	return 0;
 }
+

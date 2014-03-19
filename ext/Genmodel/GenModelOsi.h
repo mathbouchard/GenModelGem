@@ -15,29 +15,35 @@
 #endif
 
 #include "GenModel.h"
-#include "OsiClpSolverInterface.hpp"
-//#include "OsiCpxSolverInterface.hpp"
-//#include "OsiSpxSolverInterface.hpp"
-//#include "OsiGrbSolverInterface.hpp"
-//#include "OsiGlpkSolverInterface.hpp"
-//#include "OsiVolSolverInterface.hpp"
-#include "CbcModel.hpp"
-//#include "CbcBranchUser.hpp"
-//#include "CbcCompareUser.hpp"
-#include "CbcCutGenerator.hpp"
-#include "CbcHeuristicLocal.hpp"
-#include "CbcHeuristicGreedy.hpp"
-#include "CglProbing.hpp"
-#include "CbcHeuristic.hpp"
-#include "GenModelOsiInterface.h"
-#include "CoinTime.hpp"
-#include "CglGomory.hpp"
-#include "CglProbing.hpp"
-#include "CglKnapsackCover.hpp"
-#include "CglOddHole.hpp"
-#include "CglClique.hpp"
-#include "CglFlowCover.hpp"
-#include "CglMixedIntegerRounding.hpp"
+#ifdef OSI_MODULE
+    #include "OsiClpSolverInterface.hpp"
+    //#include "OsiCpxSolverInterface.hpp"
+    //#include "OsiSpxSolverInterface.hpp"
+    //#include "OsiGrbSolverInterface.hpp"
+    //#include "OsiGlpkSolverInterface.hpp"
+    //#include "OsiVolSolverInterface.hpp"
+    #include "CbcModel.hpp"
+    //#include "CbcBranchUser.hpp"
+    //#include "CbcCompareUser.hpp"
+    #include "CbcCutGenerator.hpp"
+    #include "CbcHeuristicLocal.hpp"
+    #include "CbcHeuristicGreedy.hpp"
+    #include "CglProbing.hpp"
+    #include "CbcHeuristic.hpp"
+    #include "GenModelOsiInterface.h"
+    #include "CoinTime.hpp"
+    #include "CglGomory.hpp"
+    #include "CglProbing.hpp"
+    #include "CglKnapsackCover.hpp"
+    #include "CglOddHole.hpp"
+    #include "CglClique.hpp"
+    #include "CglFlowCover.hpp"
+    #include "CglMixedIntegerRounding.hpp"
+#else
+    typedef unsigned long CoinBigIndex;
+    typedef void* CbcModel;
+    typedef void* OsiSolverInterface;
+#endif
 
 using namespace std;
 

@@ -5,7 +5,10 @@
  *      Author: mbouchard
  */
 
+
 #include "GenModelOsi.h"
+
+#ifdef OSI_MODULE
 #include "ProblemReaderOsi.h"
 #include "CbcHeuristicFPump.hpp"
 #include "CbcHeuristicRINS.hpp"
@@ -15,6 +18,7 @@
 #include <limits>
 
 using namespace std;
+
 
 long GenModelOsi::WriteProblemToLpFile(string filename)
 {
@@ -817,6 +821,26 @@ long GenModelOsi::Clean()
 
 	return 0;
 }
+#else
+
+long osi_not_implemented() { throw string("The Osi module is not available on this platform"); }
+
+long GenModelOsi::Init(string name) {return osi_not_implemented();}
+long GenModelOsi::CreateModel() {return osi_not_implemented();}
+long GenModelOsi::CreateModel(string filename, int type, string dn) {return osi_not_implemented();}
+long GenModelOsi::AddSolverRow(vector<int>& ind, vector<double>& val, double rhs, char sense, string name) {return osi_not_implemented();}
+long GenModelOsi::AddSolverCol(vector<int>& ind, vector<double>& val, double obj, double lb, double ub, string name, char type) {return osi_not_implemented();}
+long GenModelOsi::AddCut(int* cols, double* vals, int nz, double rhs, char sense, const char* name) {return osi_not_implemented();}
+long GenModelOsi::AddCol(int* newi, double* newcol, int nz, double obj, double lb, double ub, const char* name, char type) {return osi_not_implemented();}
+long GenModelOsi::WriteProblemToLpFile(string filename) {return osi_not_implemented();}
+long GenModelOsi::WriteSolutionToFile(string filename) {return osi_not_implemented();}
+long GenModelOsi::Solve() {return osi_not_implemented();}
+long GenModelOsi::SetSol() {return osi_not_implemented();}
+long GenModelOsi::Clean() {return osi_not_implemented();}
+long GenModelOsi::SetDirectParam(int whichparam, genmodel_param value, string type, string message) {return osi_not_implemented();}
+long GenModelOsi::SetParam(string param, int whichparam, string type, string message, bool implemented) {return osi_not_implemented();}
+
+#endif
 
 long OsiData::Reset()
 {

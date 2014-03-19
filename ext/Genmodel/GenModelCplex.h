@@ -17,7 +17,14 @@
 #endif
 
 #include "GenModel.h"
-#include <ilcplex/cplex.h>
+
+#ifdef CPLEX_MODULE
+    #include <ilcplex/cplex.h>
+#else
+    typedef void* CPXENVptr;
+    typedef void* CPXLPptr;
+    typedef void* CPXFILEptr;
+#endif
 
 using namespace std;
 

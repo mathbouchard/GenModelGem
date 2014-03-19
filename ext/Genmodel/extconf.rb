@@ -142,11 +142,12 @@ if is_darwin
         puts "found"
     else
         puts "not found"
-        is_osi = false
+        #is_osi = false
     end
     
 elsif is_linux
-    path = Dir.home+"/ibm/ILOG/CPLEX_Studio126/cplex/include:/opt/ibm/ILOG/CPLEX_Studio126/cplex/include"
+    # path = Dir.home+"/ibm/ILOG/CPLEX_Studio126/cplex/include:/opt/ibm/ILOG/CPLEX_Studio126/cplex/include"
+    path = "/opt/ibm/ILOG/CPLEX_Studio126/cplex/include"
     puts "Looking for ilcplex/cplex.h in "+path
     if(is_cplex && find_header("ilcplex/cplex.h",path))
         puts "found"
@@ -163,19 +164,11 @@ elsif is_linux
         puts "not found"
     end
     
-    path = "/usr/include/coin/"
-    puts "Looking for OsiClpSolverInterface.hpp in "+path
-    if(is_cplex && find_header("OsiClpSolverInterface.hpp",path))
-        puts "found"
-    else
-        puts "not found"
-        is_osi = false
-    end
-    
     cbc_path = "/usr/include/coin/"
     cbc_file = "OsiClpSolverInterface.hpp"
+    puts "Looking for OsiClpSolverInterface.hpp in "+cbc_path+"/*"
     if(is_osi && File.exist?(cbc_path+cbc_file))
-        $INCFLAGS << " " << (cbc_path+cbc_file).quote
+        $INCFLAGS << " -I" << cbc_path.quote
         puts "found"
     else
         puts "not found"
@@ -233,7 +226,7 @@ elsif is_linux
         puts "found"
     else
         puts "not found"
-        is_osi = false
+        #is_osi = false
     end
     
     
