@@ -70,7 +70,7 @@ if is_darwin
     #path = "/usr/local/Cellar/cbc/2.8.6/include/coin/"+sep+"/usr/local/Cellar/cgl/0.58.3/include/coin/"
     cbc_path = "/usr/local/Cellar/cbc/"
     cbc_file = "/include/coin/OsiClpSolverInterface.hpp"
-    puts "Looking for OsiClpSolverInterface.hpp in "+cbc_path+"*"
+    puts "Looking for OsiClpSolverInterface.hpp in "+cbc_path+"/*"
     file_exist = nil
     Find.find(cbc_path) do |path|
         if (FileTest.directory?(path))
@@ -166,6 +166,16 @@ elsif is_linux
     path = "/usr/include/coin/"
     puts "Looking for OsiClpSolverInterface.hpp in "+path
     if(is_cplex && find_header("OsiClpSolverInterface.hpp",path))
+        puts "found"
+    else
+        puts "not found"
+        is_osi = false
+    end
+    
+    cbc_path = "/usr/include/coin/"
+    cbc_file = "OsiClpSolverInterface.hpp"
+    if(is_osi && File.exist?(cbc_path+cbc_file))
+        $INCFLAGS << " " << (cbc_path+cbc_file).quote
         puts "found"
     else
         puts "not found"
