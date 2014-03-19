@@ -1,32 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Workspace
    version = "1.0">
+   <FileRef
+      location = "group:Genmodel.gemspec">
+   </FileRef>
+   <FileRef
+      location = "group:gem_version">
+   </FileRef>
+   <FileRef
+      location = "group:ext/Genmodel/GenModelBase.cpp">
+   </FileRef>
+   <FileRef
+      location = "group:ext/Genmodel/Genmodel.cpp">
+   </FileRef>
+   <FileRef
+      location = "group:ext/Genmodel/InterfaceObject.cpp">
+   </FileRef>
+   <FileRef
+      location = "group:ext/Genmodel/InterfaceObject.h">
+   </FileRef>
    <Group
       location = "group:src"
       name = "src">
       <FileRef
-         location = "group:GenModelGem.i">
+         location = "group:Genmodel.i">
+      </FileRef>
+      <Group
+         location = "group:../lib"
+         name = "lib">
+         <FileRef
+            location = "group:Genmodel.rb">
+         </FileRef>
+      </Group>
+   </Group>
+   <Group
+      location = "group:../ext/Genmodel"
+      name = "Genmodel">
+      <FileRef
+         location = "group:extconf.rb">
       </FileRef>
       <FileRef
-         location = "group:GenModelGem.cpp">
+         location = "group:GenModel.h">
       </FileRef>
       <FileRef
-         location = "group:BitVector.h">
+         location = "group:GenModelCplex.cpp">
       </FileRef>
       <FileRef
-         location = "group:BitVector.cpp">
+         location = "group:GenModelCplex.h">
       </FileRef>
       <FileRef
-         location = "group:GenModelGem.h">
+         location = "group:GenModelOsi.cpp">
       </FileRef>
       <FileRef
-         location = "group:../build-release/SConscript">
+         location = "group:GenModelOsi.h">
       </FileRef>
       <FileRef
-         location = "group:../gem/genmodel.gemspec">
+         location = "group:GenModelOsiInterface.cpp">
       </FileRef>
       <FileRef
-         location = "group:../SConstruct">
+         location = "group:GenModelOsiInterface.h">
+      </FileRef>
+      <FileRef
+         location = "group:ProblemReaderOsi.cpp">
+      </FileRef>
+      <FileRef
+         location = "group:ProblemReaderOsi.h">
+      </FileRef>
+      <FileRef
+         location = "group:Test.cpp">
       </FileRef>
    </Group>
 </Workspace>

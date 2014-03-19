@@ -1,4 +1,4 @@
-BaseLib
-=======
+GenModelGem
+================
 
-An empty application to start new project
+Ruby wrapper to Genmodel
