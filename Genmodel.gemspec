@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   f = File.new("gem_version", "r")
   s.version     = f.readline
-  s.date        = "#{Time.now.strftime('%Y-%m-%d')}"
+  s.date        = "2014-03-20"
   s.name        = "genmodel"
   s.summary     = "GenModel Gem"
   s.description = "A generic tool to solve optimization model with different solvers"
@@ -17,8 +17,6 @@ Gem::Specification.new do |s|
                    "ext/Genmodel/ProblemReaderOsi.h",
                    "ext/Genmodel/GenModelOsiInterface.cpp",
                    "ext/Genmodel/GenModelOsiInterface.h",
-                   "ext/Genmodel/InterfaceObject.cpp",
-                   "ext/Genmodel/InterfaceObject.h",
                    "ext/Genmodel/Genmodel.cpp",
                    "lib/Genmodel.rb"]
   s.homepage    = 'https://github.com/mathbouchard/GenModelGem'

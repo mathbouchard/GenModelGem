@@ -46,6 +46,10 @@ public:
 	ModVars() {n=0; defub=DBL_MAX; deflb=-DBL_MAX;}
 	long AddVar(string nn, double o, double l, double u, char t);
 	long AddVars(string nn, long size, double o, double l, double u, char t);
+    
+    vector<double> GetSolution();
+    double GetSolutionFromIndex(unsigned long index);    
+    
 	long SetQpCoef(long i, long j, double val);
 	long Print();
 	vector<string> name;

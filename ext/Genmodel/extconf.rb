@@ -129,7 +129,7 @@ if is_darwin
     
     path = "/usr/lib:/usr/local/lib/"
     puts "Looking for OsiClp (function main) in "+path
-    if(is_osi && find_library("Osi",nil,path))
+    if(is_osi && find_library("OsiClp",nil,path))
         puts "found"
     else
         puts "not found"
@@ -213,7 +213,7 @@ elsif is_linux
     
     path = "/usr/lib:/usr/local/lib/"
     puts "Looking for OsiClp (function main) in "+path
-    if(is_osi && find_library("Osi",nil,path))
+    if(is_osi && find_library("OsiClp",nil,path))
         puts "found"
     else
         puts "not found"

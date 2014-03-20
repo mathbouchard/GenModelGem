@@ -5,7 +5,7 @@
 
 GenModel::GenModel()
 {
-    version = "genmodel-0.0.21 build 0001";
+    version = "genmodel-0.0.23 build 0001";
     hassolution = false;
     bcreated = false;
     binit = false;
@@ -307,6 +307,23 @@ long ModVars::AddVars(string nn, long size, double o, double l, double u, char t
 
 	return 0;
 }
+
+vector<double> ModVars::GetSolution()
+{
+    if(sol.size() != n)
+        sol.resize(n,0);
+    return sol;
+}
+
+double ModVars::GetSolutionFromIndex(unsigned long index)
+{
+    if(sol.size() != n)
+        sol.resize(n,0);
+    if(index >= n)
+        throw string("Genmodel : Index out of bound");
+    return sol[index];
+}
+
 
 long ModVars::SetQpCoef(long i, long j, double val)
 {
