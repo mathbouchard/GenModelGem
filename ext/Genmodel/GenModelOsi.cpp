@@ -21,7 +21,7 @@ using namespace std;
 
 void printmsg(char* msg, GenModelOsi* p)
 {
-    if(false && p->boolParam.count("log_output_stdout") > 0 && p->boolParam["log_output_stdout"])
+    if(p->boolParam.count("log_output_stdout") > 0 && p->boolParam["log_output_stdout"])
         printf("%s", msg);
 }
 
@@ -30,8 +30,9 @@ long GenModelOsi::WriteProblemToLpFile(string filename)
     if(!bcreated)
         throw string("WriteProblemToLpFile() not available : Problem not created yet;");
     
+    size_t pos = filename.rfind(".lp");
     OsiData* d = static_cast<OsiData*>(solverdata);
-    d->model->writeLp(filename.c_str());
+    d->model->writeLp(str.filename(0,pos).c_str());
     return 0;
 }
 
@@ -230,7 +231,7 @@ long GenModelOsi::Solve()
     // Switch off most output
     if (d->mipmodel->getNumCols()<3000)
     {
-        if(false && boolParam.count("log_output_stdout") > 0 && boolParam["log_output_stdout"])
+        if(boolParam.count("log_output_stdout") > 0 && boolParam["log_output_stdout"])
             d->mipmodel->messageHandler()->setLogLevel(1);
         else
             d->mipmodel->messageHandler()->setLogLevel(0);
@@ -238,7 +239,7 @@ long GenModelOsi::Solve()
     }
     else
     {
-        if(false && boolParam.count("log_output_stdout") > 0 && boolParam["log_output_stdout"])
+        if(boolParam.count("log_output_stdout") > 0 && boolParam["log_output_stdout"])
         {
             d->mipmodel->messageHandler()->setLogLevel(2);
             //d->mipmodel->solver()->messageHandler()->setLogLevel(1);
@@ -250,7 +251,7 @@ long GenModelOsi::Solve()
         }
     }
     
-    if(false && boolParam.count("log_output_stdout") > 0 && boolParam["log_output_stdout"])
+    if(boolParam.count("log_output_stdout") > 0 && boolParam["log_output_stdout"])
         d->mipmodel->setPrintFrequency(1);//(50);
     else
         d->mipmodel->setPrintFrequency(0);
