@@ -24,6 +24,7 @@ MACOS
 
 Installation package requirements
 
+* run brew doctor and make sure that you don't have any unlink packages
 * brew tap homebrew/science
 * brew tap dpo/coinor
 * brew install cbc
