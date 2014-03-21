@@ -5,7 +5,7 @@
 
 GenModel::GenModel()
 {
-    version = "genmodel-0.0.23 build 0001";
+    version = "genmodel-0.0.24 build 0001";
     hassolution = false;
     bcreated = false;
     binit = false;
