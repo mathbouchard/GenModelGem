@@ -140,7 +140,7 @@ if is_darwin
     found_coin_utils = false
     path = "/usr/lib:/usr/local/lib/"
     puts "Looking for CoinUtils (function main) in "+path
-    if(is_cplex && find_library("CoinUtils",nil,path))
+    if(is_osi && find_library("CoinUtils",nil,path))
         found_coin_utils = true
     end
     coin_utils_path = "/usr/lib/"
