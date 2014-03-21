@@ -1,5 +1,5 @@
 module Genmodel
-    VERSION = "0.0.23"
+    GENMODEL_VERSION = "0.0.26"
 end
 
 require "Genmodel/Genmodel"
