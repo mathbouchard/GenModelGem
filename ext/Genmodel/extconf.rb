@@ -136,32 +136,14 @@ if is_darwin
         is_osi = false
     end
     
-    
-    found_coin_utils = false
     path = "/usr/lib:/usr/local/lib/"
     puts "Looking for CoinUtils (function main) in "+path
     if(is_osi && find_library("CoinUtils",nil,path))
-        found_coin_utils = true
-    end
-    coin_utils_path = "/usr/lib/"
-    coin_utils_file = "libCoinUtils.so"
-    if(!found_coin_utils && is_osi && File.exist?(coin_utils_path+coin_utils_file))
-        puts "Fallback : Looking for libCoinUtils.so in "+coin_utils_path
-        found_coin_utils = true
-    end
-    coin_utils_path = "/usr/local/lib/"
-    if(!found_coin_utils && is_osi && File.exist?(coin_utils_path+coin_utils_file))
-        puts "Second fallback : Looking for libCoinUtils.so in "+coin_utils_path
-        found_coin_utils = true
-    end
-    if found_coin_utils
         puts "found"
-        $LIBS << "-lCoinUtils"
     else
         puts "not found"
-        is_osi = false
+        #is_osi = false
     end
-    
     
 elsif is_linux
     # path = Dir.home+"/ibm/ILOG/CPLEX_Studio126/cplex/include:/opt/ibm/ILOG/CPLEX_Studio126/cplex/include"
@@ -238,30 +220,16 @@ elsif is_linux
         is_osi = false
     end
     
-    found_coin_utils = false
     path = "/usr/lib:/usr/local/lib/"
     puts "Looking for CoinUtils (function main) in "+path
     if(is_osi && find_library("CoinUtils",nil,path))
-        found_coin_utils = true
-    end
-    coin_utils_path = "/usr/lib/"
-    coin_utils_file = "libCoinUtils.so"
-    if(!found_coin_utils && is_osi && File.exist?(coin_utils_path+coin_utils_file))
-        puts "Fallback : Looking for libCoinUtils.so in "+coin_utils_path
-        found_coin_utils = true
-    end
-    coin_utils_path = "/usr/local/lib/"
-    if(!found_coin_utils && is_osi && File.exist?(coin_utils_path+coin_utils_file))
-        puts "Second fallback : Looking for libCoinUtils.so in "+coin_utils_path
-        found_coin_utils = true
-    end
-    if found_coin_utils
         puts "found"
-        $LIBS << "-lCoinUtils"
     else
         puts "not found"
-        is_osi = false
+        #is_osi = false
     end
+    
+    
 else
     is_cplex = false;
     is_osi = false;
@@ -270,7 +238,7 @@ end
 
 if(is_cplex)
     puts "*** With CPLEX_MOUDLE ***"
-    #$defs.push("-DCPLEX_MODULE")
+    $defs.push("-DCPLEX_MODULE")
 end
 if(is_osi)
     puts "*** With OSI_MOUDLE ***"
