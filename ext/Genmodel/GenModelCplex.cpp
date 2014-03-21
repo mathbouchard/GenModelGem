@@ -597,7 +597,7 @@ long GenModelCplex::Init(string name)
     }
     
     // General settings
-    boolParam["log_output_stdout"] = true;
+    //boolParam["log_output_stdout"] = true;
     SetParam("log_output_stdout", CPX_PARAM_SCRIND, "bool", "Failure to turn on/off log output to stdout");
     SetParam("log_level", 0, "long", "Failure to set log level", false);
     SetParam("use_data_checking", CPX_PARAM_DATACHECK, "bool", "Failure to turn on/off data checking");

@@ -19,6 +19,11 @@
 
 using namespace std;
 
+void printmsg(char* msg, GenModelOsi* p)
+{
+    if(false && p->boolParam.count("log_output_stdout") > 0 && p->boolParam["log_output_stdout"])
+        printf("%s", msg);
+}
 
 long GenModelOsi::WriteProblemToLpFile(string filename)
 {
@@ -48,6 +53,7 @@ long GenModelOsi::WriteSolutionToFile(string filename)
 
 long GenModelOsi::Solve()
 {
+    char tmp[4096];
     if(!bcreated)
         throw string("WriteSolutionToFile() not available : Problem not created yet;");
     OsiData* d = static_cast<OsiData*>(solverdata);
@@ -217,40 +223,56 @@ long GenModelOsi::Solve()
     // If time is given then stop after that number of minutes
     if (dblParam.count("time_limit") > 0)
     {
-        printf("Stopping after %f seconds\n", dblParam["time_limit"]);
+        snprintf(tmp,4096,"Stopping after %f seconds\n", dblParam["time_limit"]); printmsg(tmp, this);
         d->mipmodel->setDblParam(CbcModel::CbcMaximumSeconds, dblParam["time_limit"]);
     }
 
     // Switch off most output
     if (d->mipmodel->getNumCols()<3000)
     {
-        d->mipmodel->messageHandler()->setLogLevel(1);
+        if(false && boolParam.count("log_output_stdout") > 0 && boolParam["log_output_stdout"])
+            d->mipmodel->messageHandler()->setLogLevel(1);
+        else
+            d->mipmodel->messageHandler()->setLogLevel(0);
         //d->model->solver()->messageHandler()->setLogLevel(0);
     }
     else
     {
-        d->mipmodel->messageHandler()->setLogLevel(2);
-        d->mipmodel->solver()->messageHandler()->setLogLevel(1);
+        if(false && boolParam.count("log_output_stdout") > 0 && boolParam["log_output_stdout"])
+        {
+            d->mipmodel->messageHandler()->setLogLevel(2);
+            //d->mipmodel->solver()->messageHandler()->setLogLevel(1);
+        }
+        else
+        {
+            d->mipmodel->messageHandler()->setLogLevel(0);
+            //d->mipmodel->solver()->messageHandler()->setLogLevel(0);
+        }
     }
-    d->mipmodel->setPrintFrequency(1);//(50);
+    
+    if(false && boolParam.count("log_output_stdout") > 0 && boolParam["log_output_stdout"])
+        d->mipmodel->setPrintFrequency(1);//(50);
+    else
+        d->mipmodel->setPrintFrequency(0);
 
     double time1 = CoinCpuTime();
     
     // Do complete search
     d->mipmodel->branchAndBound();
     
-    printf(" took %f seconds, %d nodes with objective %f, %s\n",
-           CoinCpuTime()-time1, d->mipmodel->getNodeCount(), d->mipmodel->getObjValue(), (!d->mipmodel->status() ? " Finished" : " Not finished"));
+    snprintf(tmp,4096," took %f seconds, %d nodes with objective %f, %s\n",
+           CoinCpuTime()-time1, d->mipmodel->getNodeCount(), d->mipmodel->getObjValue(), (!d->mipmodel->status() ? " Finished" : " Not finished")); printmsg(tmp, this);
 
     // Print more statistics
-    printf("Cuts at root node changed objective from %f to %f\n", d->mipmodel->getContinuousObjective(), d->mipmodel->rootObjectiveAfterCuts());
+    snprintf(tmp,4096,"Cuts at root node changed objective from %f to %f\n",
+                             d->mipmodel->getContinuousObjective(), d->mipmodel->rootObjectiveAfterCuts()); printmsg(tmp, this);
     
     int numberGenerators = d->mipmodel->numberCutGenerators();
     for (int iGenerator=0;iGenerator<numberGenerators;iGenerator++)
     {
         CbcCutGenerator * generator = d->mipmodel->cutGenerator(iGenerator);
-        printf("%s was tried %d times and created %d cuts of which %d were active after adding rounds of cuts\n", generator->cutGeneratorName(),
-               generator->numberTimesEntered(),generator->numberCutsInTotal(), generator->numberCutsActive());
+        snprintf(tmp,4096,"%s was tried %d times and created %d cuts of which %d were active after adding rounds of cuts\n", generator->cutGeneratorName(),
+               generator->numberTimesEntered(),generator->numberCutsInTotal(), generator->numberCutsActive()); printmsg(tmp, this);
     }
     
     hassolution = d->mipmodel->getIntParam(CbcModel::CbcMaxNumSol) > 0;

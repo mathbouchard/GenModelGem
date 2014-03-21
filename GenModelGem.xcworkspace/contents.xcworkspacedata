@@ -5,19 +5,13 @@
       location = "group:Genmodel.gemspec">
    </FileRef>
    <FileRef
+      location = "group:README.md">
+   </FileRef>
+   <FileRef
       location = "group:gem_version">
    </FileRef>
    <FileRef
       location = "group:ext/Genmodel/GenModelBase.cpp">
-   </FileRef>
-   <FileRef
-      location = "group:ext/Genmodel/Genmodel.cpp">
-   </FileRef>
-   <FileRef
-      location = "group:ext/Genmodel/InterfaceObject.cpp">
-   </FileRef>
-   <FileRef
-      location = "group:ext/Genmodel/InterfaceObject.h">
    </FileRef>
    <Group
       location = "group:src"
