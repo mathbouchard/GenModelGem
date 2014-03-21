@@ -35,6 +35,10 @@ Compiling package requirements
 * Install Xcode
 * brew install swig
 
+Notes
+
+If you have macports along side brew or if you have installed some library yourself by doing make install, it is possible that some conflict are blocking the building of cbc, if it's the case run brew doctor and pay close attention to step 1 and step 2.
+
 To build:
 ---------
 
