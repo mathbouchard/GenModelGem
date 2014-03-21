@@ -31,8 +31,9 @@ long GenModelOsi::WriteProblemToLpFile(string filename)
         throw string("WriteProblemToLpFile() not available : Problem not created yet;");
     
     size_t pos = filename.rfind(".lp");
+    
     OsiData* d = static_cast<OsiData*>(solverdata);
-    d->model->writeLp(str.filename(0,pos).c_str());
+    d->model->writeLp(filename.substr(0,pos).c_str());
     return 0;
 }
 
