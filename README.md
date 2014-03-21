@@ -24,7 +24,8 @@ MACOS
 
 Installation package requirements
 
-* run brew doctor and make sure that you don't have any unlink packages
+* run brew doctor and make sure that you don't have any unlink packages and that you have all the necessary write permissions (according to brew doctor)
+* cbc depends on : cloog gfortran gmp isl libmpc mpfr. They should be installed along cbc, but if some of them are already installed make sure they don't have any pending problem in brew doctor.
 * brew tap homebrew/science
 * brew tap dpo/coinor
 * brew install cbc
