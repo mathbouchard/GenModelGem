@@ -68,16 +68,16 @@ if is_darwin
     end
     
     #path = "/usr/local/Cellar/cbc/2.8.6/include/coin/"+sep+"/usr/local/Cellar/cgl/0.58.3/include/coin/"
-    cbc_path = "/usr/local/Cellar/cbc/"
-    cbc_file = "/include/coin/OsiClpSolverInterface.hpp"
-    puts "Looking for OsiClpSolverInterface.hpp in "+cbc_path+"/*"
+    search_path = "/usr/local/Cellar/cbc/"
+    search_file = "/include/coin/OsiClpSolverInterface.hpp"
+    puts "Looking for OsiClpSolverInterface.hpp in "+search_path+"/*"
     file_exist = nil
-    Find.find(cbc_path) do |path|
+    Find.find(search_path) do |path|
         if (FileTest.directory?(path))
-            puts path+cbc_file
+            puts path+search_file
             temp_name = (path).gsub(/\/usr\/local\/Cellar\/cbc\//,'')
             count = temp_name.count('/')
-            if ((count == 0) && (File.exist?(path+cbc_file)))
+            if ((count == 0) && (File.exist?(path+search_file)))
                 file_exist = "-I#{path}/include/coin"
                 break
             end
@@ -90,6 +90,30 @@ if is_darwin
         puts "not found"
         is_osi = false
     end
+    
+    search_path = "/usr/local/Cellar/lemon-graph/"
+    search_file = "/include/lemon/core.h"
+    puts "Looking for lemon/core.h in "+search_path+"/*"
+    file_exist = nil
+    Find.find(search_path) do |path|
+        if (FileTest.directory?(path))
+            puts path+search_file
+            temp_name = (path).gsub(/\/usr\/local\/Cellar\/lemon-graph\//,'')
+            count = temp_name.count('/')
+            if ((count == 0) && (File.exist?(path+search_file)))
+                file_exist = "-I#{path}/include"
+                break
+            end
+        end
+    end
+    if(is_osi && file_exist != nil)
+        $INCFLAGS << " " << file_exist.quote
+        puts "found"
+    else
+        puts "not found"
+        is_osi = false
+    end
+    
     
     path = "/usr/lib:/usr/local/lib/"
     puts "Looking for Clp (function main) in "+path
@@ -143,6 +167,15 @@ if is_darwin
     else
         puts "not found"
         #is_osi = false
+    end
+    
+    path = "/usr/lib:/usr/local/lib/"
+    puts "Looking for libemon.dylib (function main) in "+path
+    if(is_osi && find_library("emon",nil,path))
+        puts "found"
+        else
+        puts "not found"
+        is_osi = false
     end
     
 elsif is_linux
@@ -245,6 +278,6 @@ if(is_osi)
     $defs.push("-DOSI_MODULE")
 end
 
-
+#swig -ruby -o ext/GenModelGem/Genmodel.cpp -c++ src/Genmodel.i
 
 create_makefile (extension_name)

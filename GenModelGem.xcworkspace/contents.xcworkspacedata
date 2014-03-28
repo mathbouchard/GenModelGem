@@ -2,7 +2,61 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:ext/Genmodel/GraphTools.cpp">
+   </FileRef>
+   <FileRef
+      location = "group:ext/Genmodel/GraphTools.h">
+   </FileRef>
+   <FileRef
+      location = "group:ext/Genmodel/BitVector.cpp">
+   </FileRef>
+   <FileRef
+      location = "group:ext/Genmodel/BitVector.h">
+   </FileRef>
+   <FileRef
+      location = "group:../../../../usr/local/Cellar/lemon-graph/1.3/include/lemon/concepts/graph.h">
+   </FileRef>
+   <FileRef
+      location = "group:../../../../usr/local/Cellar/lemon-graph/1.3/include/lemon/list_graph.h">
+   </FileRef>
+   <FileRef
+      location = "group:../../../../usr/local/Cellar/lemon-graph/1.3/include/lemon/bits/graph_extender.h">
+   </FileRef>
+   <FileRef
       location = "group:Genmodel.gemspec">
+   </FileRef>
+   <FileRef
+      location = "group:ext/Genmodel/extconf.rb">
+   </FileRef>
+   <FileRef
+      location = "group:ext/Genmodel/Genmodel.cpp">
+   </FileRef>
+   <FileRef
+      location = "group:ext/Genmodel/GenModel.h">
+   </FileRef>
+   <FileRef
+      location = "group:ext/Genmodel/GenModelCplex.cpp">
+   </FileRef>
+   <FileRef
+      location = "group:ext/Genmodel/GenModelCplex.h">
+   </FileRef>
+   <FileRef
+      location = "group:ext/Genmodel/GenModelOsi.cpp">
+   </FileRef>
+   <FileRef
+      location = "group:ext/Genmodel/GenModelOsi.h">
+   </FileRef>
+   <FileRef
+      location = "group:ext/Genmodel/GenModelOsiInterface.cpp">
+   </FileRef>
+   <FileRef
+      location = "group:ext/Genmodel/GenModelOsiInterface.h">
+   </FileRef>
+   <FileRef
+      location = "group:ext/Genmodel/ProblemReaderOsi.cpp">
+   </FileRef>
+   <FileRef
+      location = "group:ext/Genmodel/ProblemReaderOsi.h">
    </FileRef>
    <FileRef
       location = "group:README.md">
@@ -19,6 +73,37 @@
       <FileRef
          location = "group:Genmodel.i">
       </FileRef>
+      <FileRef
+         location = "group:../../../../../usr/local/Cellar/lemon-graph/1.3/include/lemon/core.h">
+      </FileRef>
+      <FileRef
+         location = "group:../../../../../usr/local/Cellar/lemon-graph/1.3/include/lemon/concepts/graph_components.h">
+      </FileRef>
+      <Group
+         location = "group:../../../../../usr/local/Cellar/lemon-graph/1.3/include/lemon/concepts"
+         name = "concepts">
+         <FileRef
+            location = "group:bpgraph.h">
+         </FileRef>
+         <FileRef
+            location = "group:digraph.h">
+         </FileRef>
+         <FileRef
+            location = "group:graph.h">
+         </FileRef>
+         <FileRef
+            location = "group:graph_components.h">
+         </FileRef>
+         <FileRef
+            location = "group:heap.h">
+         </FileRef>
+         <FileRef
+            location = "group:maps.h">
+         </FileRef>
+         <FileRef
+            location = "group:path.h">
+         </FileRef>
+      </Group>
       <Group
          location = "group:../lib"
          name = "lib">
@@ -30,38 +115,5 @@
    <Group
       location = "group:../ext/Genmodel"
       name = "Genmodel">
-      <FileRef
-         location = "group:extconf.rb">
-      </FileRef>
-      <FileRef
-         location = "group:GenModel.h">
-      </FileRef>
-      <FileRef
-         location = "group:GenModelCplex.cpp">
-      </FileRef>
-      <FileRef
-         location = "group:GenModelCplex.h">
-      </FileRef>
-      <FileRef
-         location = "group:GenModelOsi.cpp">
-      </FileRef>
-      <FileRef
-         location = "group:GenModelOsi.h">
-      </FileRef>
-      <FileRef
-         location = "group:GenModelOsiInterface.cpp">
-      </FileRef>
-      <FileRef
-         location = "group:GenModelOsiInterface.h">
-      </FileRef>
-      <FileRef
-         location = "group:ProblemReaderOsi.cpp">
-      </FileRef>
-      <FileRef
-         location = "group:ProblemReaderOsi.h">
-      </FileRef>
-      <FileRef
-         location = "group:Test.cpp">
-      </FileRef>
    </Group>
 </Workspace>

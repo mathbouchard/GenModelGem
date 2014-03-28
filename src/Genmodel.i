@@ -18,6 +18,8 @@
     #include "GenModel.h"
     #include "GenModelCplex.h"
     #include "GenModelOsi.h"
+    #include "GraphTools.h"
+    #include "BitVector.h"
 %}
 
 %inline%{
@@ -25,6 +27,8 @@
     vector<double> test1;
 %}
 
+%template(ULongVector) std::vector<size_t>;
+%template(ULongVector2d) std::vector<std::vector<size_t> >;
 %template(IntVector) std::vector<int>;
 %template(LongVector) std::vector<long>;
 %template(DoubleVector) std::vector<double>;
@@ -191,3 +195,32 @@ public:
     long SetDirectParam(int whichparam, genmodel_param value, string type, string message);
     long SetParam(string param, int whichparam, string type, string message, bool implemented = true);
 };
+
+class GmGraph
+{
+public:
+    GmGraph() {}
+    ~GmGraph() {}
+    size_t AddNode();
+    size_t AddEdge(size_t i, size_t j);
+    void EraseNode(size_t i);
+    void EraseEdge(size_t i);
+    void ChangeU(size_t i, size_t j);
+    void ChangeV(size_t i, size_t j);
+    size_t u(size_t i);
+    size_t v(size_t i);
+    void Contract(size_t i, size_t j, bool r = true);
+    void Clear();
+    void ReserveNode(size_t n);
+    void ReserveEdge(size_t m);
+    size_t n();
+    size_t e();
+    size_t di(size_t i);
+    std::vector<size_t> ie(size_t i);
+    std::vector<size_t> in(size_t i);
+    BitVector ie2bv(size_t i);
+    BitVector in2bv(size_t i);
+    
+    std::vector<std::vector<size_t> > GetCliqueCover();
+};
+

@@ -17,6 +17,10 @@ Gem::Specification.new do |s|
                    "ext/Genmodel/ProblemReaderOsi.h",
                    "ext/Genmodel/GenModelOsiInterface.cpp",
                    "ext/Genmodel/GenModelOsiInterface.h",
+                   "ext/Genmodel/GraphTools.cpp",
+                   "ext/Genmodel/GraphTools.h",
+                   "ext/Genmodel/BitVector.cpp",
+                   "ext/Genmodel/BitVector.h",
                    "ext/Genmodel/Genmodel.cpp",
                    "lib/Genmodel.rb"]
   s.homepage    = 'https://github.com/mathbouchard/GenModelGem'
